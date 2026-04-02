@@ -4,25 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSAP Studio - Animate Everything.</title>
+    <title>CodedCabin</title>
     <meta name="description" content="GSAP-powered motion for the modern web. Smooth, precise, and blazing fast.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Foldit:wght@100..900&family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!-- GSAP library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+    }
+    </script>
 </head>
 
 <body>
+    <div id="loader">
+        <span id="loader-text"><span class="char">H</span><span class="char">E</span><span class="char">L</span><span class="char">L</span><span class="char">O</span></span>
+        <div id="loader-line"></div>
+        <div id="loader-bar-wrap"><div id="loader-bar"></div></div>
+        <div id="loader-percent">0%</div>
+    </div>
+
     <div class="noise-overlay"></div>
 
-    <div class="hero-wrapper" id="home">
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
 
+    <div class="hero-wrapper" id="home">
+        <!-- Three.js 3D Canvas -->
+        <canvas id="hero-3d"></canvas>
+
+        <!-- CodedCabin FILL layer (bottommost) -->
+        <div class="hero-brand-bg hero-brand-fill">
+            <span class="hero-brand-text hero-brand-text--fill">CodedCabin</span>
+        </div>
+
+        <!-- CodedCabin OUTLINE layer (topmost) -->
+        <div class="hero-brand-bg hero-brand-outline">
+            <span class="hero-brand-text hero-brand-text--outline">CodedCabin</span>
+        </div>
 
         <div class="hero-text-bg" id="bg-container">
             <div class="text-bg-row">
@@ -95,34 +125,415 @@
         </div> <!-- End of hero-text-bg -->
     </div> <!-- End of hero-wrapper -->
 
-    <section id="features" class="content-section alt-bg">
-        <h2 class="section-title">Features</h2>
-        <p class="section-content">
-            Unleash the full potential of your web experiences with silky smooth animations,
-            pixel-perfect positioning, and timeline control that gives you absolute power over
-            every moving element on the screen. Build digital visions that future audiences expect.
-        </p>
+    <section id="features" class="content-section features-section">
+        <div class="features-inner">
+            <span class="section-label">What we build</span>
+
+            <div class="carousel" style="--quantity: 9">
+
+            <div class="card" style="--position: 1">
+                <span class="card-tag">Top performing</span>
+                <h2 class="card-title"><span class="num">01. </span>Website Rebuild</h2>
+                <p class="card-desc">We rebuild small business websites from the ground up — fast, clean, and built to convert. Every site is responsive, SEO-ready, and handed over live within 48 hours.</p>
+                <div class="pills">
+                    <span class="pill">Custom Layout</span>
+                    <span class="pill">Mobile-First</span>
+                    <span class="pill">SEO Structure</span>
+                    <span class="pill">Live Deployment</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 2">
+                <span class="card-tag">MVP Go-to-market</span>
+                <h2 class="card-title"><span class="num">02. </span>48-Hour Launch</h2>
+                <p class="card-desc">From signed contract to live website in two days. We move fast without cutting corners — so your business stops losing leads to a slow or outdated site.</p>
+                <div class="pills">
+                    <span class="pill">Rapid Build</span>
+                    <span class="pill">Copy Integration</span>
+                    <span class="pill">Hosting Setup</span>
+                    <span class="pill">Same-Week Delivery</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 3">
+                <span class="card-tag">User Focused</span>
+                <h2 class="card-title"><span class="num">03. </span>Conversion-Led Pages</h2>
+                <p class="card-desc">Every section is built around one goal — turning visitors into paying customers. We design with your buyer's journey in mind, not just aesthetics.</p>
+                <div class="pills">
+                    <span class="pill">Hero & CTA</span>
+                    <span class="pill">Trust Signals</span>
+                    <span class="pill">Lead Forms</span>
+                    <span class="pill">Clear Page Flow</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 4">
+                <span class="card-tag">Brand Defining</span>
+                <h2 class="card-title"><span class="num">04. </span>Visual Identity</h2>
+                <p class="card-desc">Your website should look like it belongs to a serious business. We build a consistent visual language — colors, fonts, and layout that make you memorable.</p>
+                <div class="pills">
+                    <span class="pill">Color System</span>
+                    <span class="pill">Typography</span>
+                    <span class="pill">Logo Integration</span>
+                    <span class="pill">Brand Consistency</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 5">
+                <span class="card-tag">Brand Defining</span>
+                <h2 class="card-title"><span class="num">05. </span>Messaging & Voice</h2>
+                <p class="card-desc">We write copy that sounds like you, sells like a pro, and speaks directly to your ideal customer. No filler, no fluff — just words that do work.</p>
+                <div class="pills">
+                    <span class="pill">Headline Writing</span>
+                    <span class="pill">Service Copy</span>
+                    <span class="pill">About Section</span>
+                    <span class="pill">CTA Copy</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 6">
+                <span class="card-tag">Detail Driven + AI</span>
+                <h2 class="card-title"><span class="num">06. </span>AI-Powered Build</h2>
+                <p class="card-desc">We use AI at every stage to move faster and sharper — from layout decisions to copy drafts to QA. Premium site, fraction of the usual cost.</p>
+                <div class="pills">
+                    <span class="pill">AI Copywriting</span>
+                    <span class="pill">Layout Gen</span>
+                    <span class="pill">Content Structure</span>
+                    <span class="pill">Quality Review</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 7">
+                <span class="card-tag">Motion with Purpose</span>
+                <h2 class="card-title"><span class="num">07. </span>Micro-Interactions</h2>
+                <p class="card-desc">Subtle animations and scroll effects that make your site feel alive — without slowing it down. Every motion has a reason.</p>
+                <div class="pills">
+                    <span class="pill">Scroll Animations</span>
+                    <span class="pill">Hover Effects</span>
+                    <span class="pill">Page Transitions</span>
+                    <span class="pill">Load Sequences</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 8">
+                <span class="card-tag">Data Backed Decisions</span>
+                <h2 class="card-title"><span class="num">08. </span>SEO & Analytics</h2>
+                <p class="card-desc">We wire up the tools that tell you what's working. Your site launches with full visibility from day one — meta tags, schema, and tracking all set.</p>
+                <div class="pills">
+                    <span class="pill">On-Page SEO</span>
+                    <span class="pill">Meta & Schema</span>
+                    <span class="pill">Google Analytics</span>
+                    <span class="pill">Search Console</span>
+                </div>
+            </div>
+
+            <div class="card" style="--position: 9">
+                <span class="card-tag">Audience Growing</span>
+                <h2 class="card-title"><span class="num">09. </span>Lead Generation</h2>
+                <p class="card-desc">Your website isn't a brochure — it's your best salesperson. Every page is designed to capture attention, build trust, and drive inbound inquiries.</p>
+                <div class="pills">
+                    <span class="pill">Lead Forms</span>
+                    <span class="pill">Social Proof</span>
+                    <span class="pill">Local SEO</span>
+                    <span class="pill">CTA Placement</span>
+                </div>
+            </div>
+
+            </div><!-- end .carousel -->
+        </div>
     </section>
 
-    <section id="about" class="content-section">
-        <h2 class="section-title">About Us</h2>
-        <p class="section-content">
-            We are a studio dedicated to the craft of motion design. We believe that
-            interactions should feel organic, responsive, and delightful. By leveraging
-            the power of GSAP, we turn static layouts into dynamic, living spaces.
-        </p>
+    <!-- ── TICKER ── -->
+    <div class="ticker-wrap">
+        <div class="ticker-track" id="ticker-track"></div>
+    </div>
+
+    <!-- ── DIVIDER ── -->
+    <div class="section-divider"><hr /></div>
+
+    <!-- ── ABOUT ── -->
+    <section id="about" class="about-section">
+        <div class="about-inner">
+            <span class="slash-label">/ About Us</span>
+
+            <h1 class="headline"><span class="accent">Builders</span> at the Core</h1>
+
+            <p class="roles">Agency. Designers. Closers. Operators.</p>
+
+            <div class="body-text">
+                <p>We're CodedCabin — a remote web agency that rebuilds small business websites in 48 hours, flat. No bloated retainers, no 6-week timelines. Just a clean, conversion-ready site handed over live.</p>
+                <p>We work with US-based service businesses who are tired of losing leads to a slow or outdated site. One fixed price. One week. Done.</p>
+                <p>Our impact speaks first.</p>
+            </div>
+
+            <div class="cta-row">
+                <a href="#" class="btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="4" width="18" height="18" rx="2" stroke="#fff" stroke-width="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="8" y1="2" x2="8" y2="6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="3" y1="10" x2="21" y2="10" stroke="#fff" stroke-width="2"/>
+                    </svg>
+                    Book a Call
+                </a>
+                <a href="mailto:devmintofficial@gmail.com" class="btn-outline">Copy Email</a>
+                <a href="#features" class="btn-outline">See Our Work</a>
+            </div>
+
+            <div class="trust">
+                <div class="stars">
+                    <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="trust-text">Trusted by US small businesses</p>
+            </div>
+
+            <div class="socials">
+                <a href="#" class="soc" title="X / Twitter">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="#" class="soc" title="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="#" class="soc" title="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="mailto:devmintofficial@gmail.com" class="soc" title="Email">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section id="contact" class="content-section alt-bg">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-content">
-            Ready to bring your digital vision to life? Let's talk about your next big project.<br><br>
-            <a href="mailto:hello@gsapstudio.com"
-                style="color: var(--accent); font-weight: bold; text-decoration: none;">hello@gsapstudio.com</a>
-        </p>
+    <!-- ── STATEMENT ── -->
+    <section class="statement-section">
+        <div class="statement-inner">
+            <p class="reveal-text" id="reveal-text"></p>
+        </div>
+    </section>
+
+    <!-- ── CONTACT / FOOTER ── -->
+    <section id="contact" class="contact-footer">
+
+        <!-- Massive Brand Typography -->
+        <div class="cf-hero">
+            <h1 class="cf-brand">CodedCabin</h1>
+        </div>
+
+        <!-- Services Strip -->
+        <div class="cf-services">
+            <span class="cf-srv">Website Rebuilds</span>
+            <span class="cf-srv">48-Hour Launches</span>
+            <span class="cf-srv">Conversion Pages</span>
+            <span class="cf-srv">Visual Identity</span>
+            <span class="cf-srv">SEO &amp; Analytics</span>
+            <span class="cf-srv">Lead Generation</span>
+        </div>
+
+        <!-- Form + Heading -->
+        <div class="cf-form-block">
+            <p class="cf-form-heading">Start a project</p>
+            <form class="cf-form" onsubmit="return false;">
+                <div class="cf-field">
+                    <input type="text" placeholder="Name" autocomplete="name" required />
+                </div>
+                <div class="cf-field">
+                    <input type="email" placeholder="Email" autocomplete="email" required />
+                </div>
+                <div class="cf-field">
+                    <input type="text" placeholder="Company (optional)" autocomplete="organization" />
+                </div>
+                <div class="cf-field">
+                    <textarea placeholder="Tell us about your project" rows="3"></textarea>
+                </div>
+                <button type="submit" class="cf-submit">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Four-Column Footer Grid -->
+        <div class="cf-grid">
+            <!-- Col 1 — Contact -->
+            <div class="cf-col">
+                <h4 class="cf-col-title">Contact</h4>
+                <ul class="cf-list">
+                    <li><a href="mailto:devmintofficial@gmail.com">devmintofficial@gmail.com</a></li>
+                    <li><a href="#">Book a Call</a></li>
+                    <li><a href="#">Twitter / X</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+            <!-- Col 2 — Navigation -->
+            <div class="cf-col">
+                <h4 class="cf-col-title">Navigation</h4>
+                <ul class="cf-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <!-- Col 3 — Legal -->
+            <div class="cf-col">
+                <h4 class="cf-col-title">Legal</h4>
+                <ul class="cf-list">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <!-- Col 4 — Studio Note -->
+            <div class="cf-col">
+                <h4 class="cf-col-title">Studio Note</h4>
+                <p class="cf-note">We rebuild small business websites in 48 hours — fast, clean, and built to convert. One price. One week. Live.</p>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="cf-bottom">
+            <span>&copy; 2026 CodedCabin</span>
+            <span>All rights reserved</span>
+        </div>
     </section>
 
     <script src="script.js"></script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { PLYLoader } from 'three/addons/loaders/PLYLoader.js';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        const canvas = document.getElementById('hero-3d');
+        const heroWrapper = document.getElementById('home');
+
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setClearColor(0x000000, 0);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(heroWrapper.offsetWidth, heroWrapper.offsetHeight);
+        renderer.toneMapping = THREE.NeutralToneMapping;
+        renderer.toneMappingExposure = 1;
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFShadowMap;
+
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(40, heroWrapper.offsetWidth / heroWrapper.offsetHeight, 0.1, 100);
+        camera.position.set(0, 2, 7);
+
+        const controls = new OrbitControls(camera, canvas);
+        controls.minDistance = 2;
+        controls.maxDistance = 10;
+        controls.maxPolarAngle = Math.PI / 2;
+        controls.target.set(0, 1, 0);
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        controls.enableRotate = false;
+        controls.update();
+
+        const ambient = new THREE.HemisphereLight(0xffffff, 0x8d8d8d, 0.25);
+        scene.add(ambient);
+
+        const spotLight = new THREE.SpotLight(0xffffff, 100);
+        const texLoader = new THREE.TextureLoader();
+        texLoader.load('https://threejs.org/examples/textures/disturb.jpg', (texture) => {
+            texture.minFilter = THREE.LinearFilter;
+            texture.magFilter = THREE.LinearFilter;
+            texture.generateMipmaps = false;
+            texture.colorSpace = THREE.SRGBColorSpace;
+            spotLight.map = texture;
+        });
+        spotLight.position.set(0, 5, 5);
+        spotLight.target.position.set(0, 1, 0);
+        scene.add(spotLight.target);
+        spotLight.angle = Math.PI / 6;
+        spotLight.penumbra = 1;
+        spotLight.decay = 2;
+        spotLight.distance = 0;
+        spotLight.castShadow = true;
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+        spotLight.shadow.camera.near = 2;
+        spotLight.shadow.camera.far = 10;
+        spotLight.shadow.focus = 1;
+        spotLight.shadow.bias = -0.003;
+        scene.add(spotLight);
+
+        // ── Parallax state ──
+        let lucyMesh = null;
+        const basePos = { x: 0, y: 0.8, z: 0 };
+        const baseRot = { x: 0, y: Math.PI, z: 0 };
+        const baseCamPos = { x: 0, y: 2, z: 7 };
+        const mouse = { x: 0, y: 0 };       // normalised –1 → 1
+        const smoothMouse = { x: 0, y: 0 };
+        let scrollProgress = 0;
+
+        new PLYLoader().load('https://threejs.org/examples/models/ply/binary/Lucy100k.ply', (geometry) => {
+            geometry.scale(0.0024, 0.0024, 0.0024);
+            geometry.computeVertexNormals();
+            const mat = new THREE.MeshLambertMaterial();
+            const mesh = new THREE.Mesh(geometry, mat);
+            mesh.rotation.y = Math.PI;
+            mesh.position.y = 0.8;
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            scene.add(mesh);
+            lucyMesh = mesh;
+        });
+
+        // ── Mouse parallax ──
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;   // –1 left, +1 right
+            mouse.y = (e.clientY / window.innerHeight) * 2 - 1;  // –1 top,  +1 bottom
+        });
+
+        // ── Scroll parallax ──
+        window.addEventListener('scroll', () => {
+            const heroH = heroWrapper.offsetHeight;
+            scrollProgress = Math.min(window.scrollY / heroH, 1); // 0 → 1 across hero
+        });
+
+        window.addEventListener('resize', () => {
+            const w = heroWrapper.offsetWidth;
+            const h = heroWrapper.offsetHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Smooth mouse lerp
+            smoothMouse.x += (mouse.x - smoothMouse.x) * 0.05;
+            smoothMouse.y += (mouse.y - smoothMouse.y) * 0.05;
+
+            if (lucyMesh) {
+                // Mouse-driven rotation (subtle tilt towards cursor)
+                lucyMesh.rotation.y = baseRot.y + smoothMouse.x * 0.35;
+                lucyMesh.rotation.x = baseRot.x + smoothMouse.y * 0.12;
+
+                // Mouse-driven position shift
+                lucyMesh.position.x = basePos.x + smoothMouse.x * 0.25;
+
+                // Scroll-driven parallax: model rises + rotates as you scroll
+                lucyMesh.position.y = basePos.y + scrollProgress * 1.8;
+                lucyMesh.rotation.z = scrollProgress * 0.08;
+
+                // Subtle scale-down on scroll for depth feel
+                const s = 1 - scrollProgress * 0.15;
+                lucyMesh.scale.set(s, s, s);
+            }
+
+            // Camera parallax (subtle)
+            camera.position.x = baseCamPos.x + smoothMouse.x * 0.3;
+            camera.position.y = baseCamPos.y - smoothMouse.y * 0.15 - scrollProgress * 0.6;
+            controls.update();
+
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
 </body>
 
 </html>
